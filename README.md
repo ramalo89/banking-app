@@ -7,35 +7,42 @@ This is a simple **Java 21 console-based banking app** with file-based user auth
 ## 🔧 Features
 
 - ✅ Java 21 project with Maven
-- 🔐 Login and registration functionality
-- 💾 Persistent user storage (`users.txt`)
-- 🧱 Service-layer structure (coming next)
-- ✅ Input validation (coming next)
-- 🧪 Unit test support (coming next)
-- 🖥️ Designed for CLI & future REST API conversion
+- 🔐 Login and registration via terminal
+- 💾 Persistent user storage using `users.txt`
+- 🧱 Modular service structure:
+  - `AuthService` for business logic
+  - `UserRepository` for file I/O
+  - `InputValidator` for field validation
+- ❌ Handles invalid usernames and passwords
+- 📂 Project structured for future REST API and Docker deployment
+- 🧪 Unit test support coming next
+
 
 ---
 
 ## 🗂️ Project Structure
 
-banking-app/ 
-├── banking-app/ 
-│ ├── src/ 
-│ │ └── main/ 
-│ │ └── java/ 
-│ │ └── com/ 
-│ │ └── bank/ 
-│ │ └── app/ 
-│ │ ├── App.java # CLI entry point 
-│ │ ├── auth/ 
-│ │ │ ├── AuthService.java # Business logic for login/register 
-│ │ │ └── User.java # User model 
-│ │ ├── repository/ 
-│ │ │ └── UserRepository.java # File I/O for users.txt 
-│ │ └── validation/ 
-│ │ └── InputValidator.java # (Coming next) 
-│ ├── pom.xml 
-│ └── users.txt # Runtime user data (ignored in Git) 
+banking-app/
+├── banking-app/
+│   ├── src/
+│   │   └── main/
+│   │       └── java/
+│   │           └── com/
+│   │               └── bank/
+│   │                   └── app/
+│   │                       ├── App.java                 # CLI entry point
+│   │                       ├── auth/
+│   │                       │   ├── AuthService.java     # Login/register logic
+│   │                       │   └── User.java            # User model
+│   │                       ├── repository/
+│   │                       │   └── UserRepository.java  # File storage for users
+│   │                       └── validation/
+│   │                           └── InputValidator.java  # Validation for inputs
+│   ├── pom.xml
+│   └── users.txt              # File-based credential store (ignored in Git)
+├── .gitignore
+└── README.md
+
 
 ---
 
@@ -43,12 +50,16 @@ banking-app/
 
 This app is now modularized for maintainability:
 
-- **App.java** – CLI entry point that handles user input
-- **AuthService.java** – Business logic for login and registration
-- **UserRepository.java** – Handles reading/writing users from `users.txt`
-- **User.java** – Data model for user credentials
+- **App.java** – CLI entry point that handles user interaction and flows
+- **AuthService.java** – Core business logic for login and registration
+- **UserRepository.java** – File-based persistence for `users.txt`
+- **User.java** – Represents a user with username and password
+- **InputValidator.java** – Validates user input (username/password rules)
 
 ---
 
-### 🛠️ Upcoming Modules
-- `InputValidator.java` – Will handle username/password validation logic
+### 🛠️ Future Enhancements
+- `UserService.java` – (Optional) Business abstraction for cleaner orchestration
+- Add JUnit 5 tests for validator, auth logic, and file access
+- Containerize with Docker (for EC2 or EKS deployment)
+
