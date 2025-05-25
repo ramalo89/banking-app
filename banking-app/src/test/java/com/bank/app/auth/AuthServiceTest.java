@@ -1,6 +1,5 @@
 package com.bank.app.auth;
 
-import com.bank.app.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
