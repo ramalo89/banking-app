@@ -17,6 +17,7 @@ This is a simple **Java 21 console-based banking app** with file-based user auth
 ---
 
 ## 🗂️ Project Structure
+
 banking-app/ 
 ├── banking-app/ 
 │ ├── src/ 
