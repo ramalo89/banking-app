@@ -1,17 +1,20 @@
 # 🏦 Banking App (Java 21)
 
-This is a simple console-based **Java 21 Banking Application** designed to simulate authentication logic for login functionality. It serves as the foundational building block for a larger banking microservices platform, with the goal of eventually supporting containerized deployments (Minikube, EKS), observability, and RESTful APIs.
+This is a simple **Java 21 console-based banking app** with file-based user authentication. It supports login and registration, storing user data in `users.txt`, and uses modular classes to separate concerns (service layer, validation, storage).
 
 ---
 
 ## 🔧 Features
 
-- ✅ Java 21 project using Maven
-- 🔐 `AuthService` module for user login
-- 🧪 JUnit 5 test suite
-- 🖥️ Works from command line and VS Code
-- 📦 Ready for Docker, Kubernetes, and cloud deployment
+- ✅ Java 21 project with Maven
+- 🔐 Login and registration functionality
+- 💾 Persistent user storage (`users.txt`)
+- 🧱 Service-layer structure (coming next)
+- ✅ Input validation (coming next)
+- 🧪 Unit test support (coming next)
+- 🖥️ Designed for CLI & future REST API conversion
 
 ---
 
 ## 🗂️ Project Structure
+
