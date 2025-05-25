@@ -1,15 +1,16 @@
 package com.bank.app.auth;
 
-import java.io.*;
-import java.util.HashMap;
+import com.bank.app.repository.UserRepository;
+
 import java.util.Map;
 
 public class AuthService {
-    private static final String USER_FILE = "banking-app/users.txt";
-    private Map<String, User> users = new HashMap<>();
+    private final UserRepository userRepository;
+    private final Map<String, User> users;
 
     public AuthService() {
-        loadUsersFromFile();
+        this.userRepository = new UserRepository("banking-app/users.txt");
+        this.users = userRepository.loadUsers();
     }
 
     public boolean login(String username, String password) {
@@ -19,34 +20,6 @@ public class AuthService {
 
     public void register(String username, String password) {
         users.put(username, new User(username, password));
-        saveUsersToFile();
-    }
-
-    private void loadUsersFromFile() {
-        File file = new File(USER_FILE);
-        if (!file.exists()) return;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":");
-                if (parts.length == 2) {
-                    users.put(parts[0], new User(parts[0], parts[1]));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("⚠️ Failed to load users: " + e.getMessage());
-        }
-    }
-
-    private void saveUsersToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(USER_FILE))) {
-            for (User user : users.values()) {
-                writer.write(user.getUsername() + ":" + user.getPassword());
-                writer.newLine();
-            }
-        } catch (IOException e) {
-            System.out.println("⚠️ Failed to save users: " + e.getMessage());
-        }
+        userRepository.saveUsers(users);
     }
 }
