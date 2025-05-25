@@ -1,83 +1,76 @@
-# 🏦 Banking App (Java 21, Maven)
+# 🏦 Banking App (Java 21)
 
-A clean, modular Java 21 console-based banking application that supports **user login and registration** with persistent storage using `users.txt`. The application follows **best practices** in structure and testing, designed to grow into a scalable architecture.
+This is a **Java 21 CLI banking app** built with **Maven**, designed for modularity and testability. It features login and registration backed by file-based user storage and unit-tested service layers.
 
 ---
 
-## ✅ Features
+## 🚀 Features
 
+- ✅ Java 21 (with Maven)
 - 🔐 User login and registration
-- 💾 File-based persistence (`users.txt`)
-- 🧱 Modular architecture (Service, Repository, Validation)
-- 🧪 Unit testing with JUnit 5 (Maven Surefire)
-- 🚫 Sensitive files like `users.txt` and build artifacts ignored via `.gitignore`
-- 🧼 Clean console UI with validation feedback
-- ☕ Built using **Java 21** and **Maven**
+- 💾 File-based persistent storage (`users.txt`)
+- 🧱 Modular architecture (auth, repository, validation)
+- 🧪 JUnit 5 test suite
+- 📁 Configurable file path for user data (test/prod friendly)
+- 🚧 Future-ready for RESTful API expansion
 
 ---
 
-## 🗂️ Project Structure
+## 🧠 Architecture Overview
 
-banking-app/
-├── src/
-│ ├── main/
-│ │ └── java/com/bank/app/
-│ │ ├── App.java # CLI entry point
-│ │ ├── auth/
-│ │ │ ├── AuthService.java # Business logic
-│ │ │ └── User.java # Data model
-│ │ ├── repository/
-│ │ │ └── UserRepository.java # File I/O (users.txt)
-│ │ └── validation/
-│ │ └── InputValidator.java # Username/password validation
-│ └── test/
-│ └── java/com/bank/app/
-│ ├── AppTest.java
-│ ├── auth/AuthServiceTest.java
-│ ├── repository/UserRepositoryTest.java
-│ └── validation/InputValidatorTest.java
-├── pom.xml # Maven config (Java 21, JUnit 5, Surefire)
-├── .gitignore # Ignores users.txt, /target/, system files
-├── users.txt # User data (ignored in Git)
-└── README.md
+| Component         | Responsibility                                |
+|------------------|------------------------------------------------|
+| `App.java`        | CLI entry point                               |
+| `AuthService.java`| Login/registration logic                      |
+| `User.java`       | User model                                    |
+| `UserRepository.java` | Read/write logic for `users.txt`         |
+| `InputValidator.java` | Ensures valid usernames/passwords         |
 
 ---
 
-## 🔧 Architecture Overview
+## 🧪 Tests
 
-This app is now modularized for maintainability:
+All core modules are unit-tested using **JUnit 5**.
 
-- **App.java** – CLI entry point that handles user interaction and flows
-- **AuthService.java** – Core business logic for login and registration
-- **UserRepository.java** – File-based persistence for `users.txt`
-- **User.java** – Represents a user with username and password
-- **InputValidator.java** – Validates user input (username/password rules)
-
----
-
-### 🛠️ Future Enhancements
-- `UserService.java` – (Optional) Business abstraction for cleaner orchestration
-- Add JUnit 5 tests for validator, auth logic, and file access
-- Containerize with Docker (for EC2 or EKS deployment)
+| Test Class                      | Purpose                                   |
+|--------------------------------|-------------------------------------------|
+| `InputValidatorTest.java`      | Validates input rules                     |
+| `AuthServiceTest.java`         | Auth logic (login, register, edge cases)  |
+| `UserRepositoryTest.java`      | File I/O (save/load user data)            |
+| `AppTest.java` *(placeholder)* | CLI entry point stub                      |
 
 ---
 
-## 🧪 Testing
-
-Run tests using:
+## 📁 Project Structure
 
 ```bash
-mvn test
+banking-app/
+├── src/
+│   ├── main/
+│   │   └── java/com/bank/app/
+│   │       ├── App.java
+│   │       ├── auth/
+│   │       │   ├── AuthService.java
+│   │       │   └── User.java
+│   │       ├── repository/
+│   │       │   └── UserRepository.java
+│   │       └── validation/
+│   │           └── InputValidator.java
+│   └── test/
+│       └── java/com/bank/app/
+│           ├── AppTest.java
+│           ├── auth/AuthServiceTest.java
+│           ├── repository/UserRepositoryTest.java
+│           └── validation/InputValidatorTest.java
+├── users.txt *(gitignored)*
+├── pom.xml
+└── README.md
+```
 
-Test coverage includes:
-✅ InputValidatorTest – validation logic
-✅ AuthServiceTest – registration/login behavior
-✅ UserRepositoryTest – file I/O for users
+## 🛠 Build & Run
 
----
+# Compile
+mvn clean install
 
-# Compile - Make sure users.txt exists under banking-app/ folder, or it will be created at runtime.
-mvn clean compile
-
-# Run manually
+# Run
 java -cp target/classes com.bank.app.App
