@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AuthService {
-    private static final String USER_FILE = "users.txt";
+    private static final String USER_FILE = "banking-app/users.txt";
     private Map<String, User> users = new HashMap<>();
 
     public AuthService() {
