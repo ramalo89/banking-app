@@ -15,7 +15,7 @@ This is a simple **Java 21 console-based banking app** with file-based user auth
   - `InputValidator` for field validation
 - ❌ Handles invalid usernames and passwords
 - 📂 Project structured for future REST API and Docker deployment
-- 🧪 Unit test support coming next
+- 🧪 Unit test support for AuthService, InputValidator, UserRepository
 
 
 ---
