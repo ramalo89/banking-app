@@ -29,17 +29,15 @@ public class App {
             } else {
                 System.out.println("❌ Login failed. Invalid credentials.");
             }
-
         } else if (choice.equals("2")) {
             System.out.print("Choose a username: ");
             String newUsername = scanner.nextLine();
-
+        
             System.out.print("Choose a password: ");
             String newPassword = scanner.nextLine();
-
-            authService.register(newUsername, newPassword);
-            System.out.println("✅ Registration successful. Please login next.");
-        } else {
+        
+            authService.register(newUsername, newPassword); // ✅ message handled inside
+        }else {
             System.out.println("❌ Invalid option. Exiting...");
         }
 

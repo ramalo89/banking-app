@@ -3,6 +3,7 @@ package com.bank.app.auth;
 import com.bank.app.repository.UserRepository;
 
 import java.util.Map;
+import com.bank.app.validation.InputValidator;
 
 public class AuthService {
     private final UserRepository userRepository;
@@ -19,7 +20,18 @@ public class AuthService {
     }
 
     public void register(String username, String password) {
+        if (!InputValidator.isUsernameValid(username)) {
+            System.out.println("❌ Username must be at least 3 characters long.");
+            return;
+        }
+    
+        if (!InputValidator.isPasswordValid(password)) {
+            System.out.println("❌ Password must be at least 6 characters long.");
+            return;
+        }
+    
         users.put(username, new User(username, password));
         userRepository.saveUsers(users);
+        System.out.println("✅ Registration successful. Please login next.");
     }
 }
