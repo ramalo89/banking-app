@@ -15,5 +15,4 @@ target/
 # Logs
 *.logusers.txt
 
-users.txt
-
+**/users.txt
