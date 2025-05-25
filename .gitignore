@@ -15,7 +15,5 @@ target/
 # Logs
 *.logusers.txt
 
-banking-app/users.txt
-banking-app/target/
-banking-app/banking-app/users.txt
-banking-app/banking-app/
+users.txt
+/target/
