@@ -65,6 +65,26 @@ banking-app/
 ├── users.txt *(gitignored)*
 ├── pom.xml
 └── README.md
+
+
+         [👤 User]
+             |
+     +------------------+
+     |   App.java (UI)  |   ← Handles user interaction
+     +------------------+
+             |
+         calls methods
+             ↓
+   +-----------------------+
+   |   AuthService.java    |   ← Business logic for login/register
+   +-----------------------+
+             |
+         reads/writes data
+             ↓
++------------------------------+
+|   UserRepository.java        |   ← Loads/Saves users (File/Memory)
++------------------------------+
+
 ```
 
 ## 🛠 Build & Run
@@ -74,3 +94,4 @@ mvn clean install
 
 # Run
 java -cp target/classes com.bank.app.App
+
