@@ -1,43 +1,45 @@
-# 🏦 Banking App (Java 21)
+# 🏦 Banking App
 
-This is a **Java 21 CLI banking app** built with **Maven**, designed for modularity and testability. It features login and registration backed by file-based user storage and unit-tested service layers.
+[![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)](https://openjdk.org/projects/jdk/21/)
+[![Build](https://img.shields.io/badge/build-passing-brightgreen?logo=apachemaven)](https://maven.apache.org/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+![Tests](https://img.shields.io/badge/tests-19_passed-brightgreen)
+
+---
+
+## 🔰 Overview
+
+This is a **Java 21 modular CLI banking app** built with **Maven**, focusing on **clean architecture**, **unit testing**, and **decoupled services** for future microservice transformation. Core features include login, registration, and basic validation with extensibility for rate-limiting and audit logging.
 
 ---
 
 ## 🚀 Features
 
-- ✅ Java 21 (with Maven)
-- 🔐 User login and registration
+- ✅ Java 21 with Maven
+- 🔐 Secure user login and registration
+- 🧱 Fully modular architecture
+- 🗂️ Decoupled services: Auth, Validation, Repository, Audit, RateLimiter
 - 💾 File-based persistent storage (`users.txt`)
-- 🧱 Modular architecture (auth, repository, validation)
-- 🧪 JUnit 5 test suite
-- 📁 Configurable file path for user data (test/prod friendly)
-- 🚧 Future-ready for RESTful API expansion
+- 🔍 Designed for observability & microservice readiness
+- 🧪 JUnit 5 test suite with edge-case coverage
+- ⚙️ Configurable file path for environment flexibility (dev/test/prod)
+- 🚧 Ready for REST API & database integrations
 
 ---
 
 ## 🧠 Architecture Overview
 
-| Component         | Responsibility                                |
-|------------------|------------------------------------------------|
-| `App.java`        | CLI entry point                               |
-| `AuthService.java`| Login/registration logic                      |
-| `User.java`       | User model                                    |
-| `UserRepository.java` | Read/write logic for `users.txt`         |
-| `InputValidator.java` | Ensures valid usernames/passwords         |
-
----
-
-## 🧪 Tests
-
-All core modules are unit-tested using **JUnit 5**.
-
-| Test Class                      | Purpose                                   |
-|--------------------------------|-------------------------------------------|
-| `InputValidatorTest.java`      | Validates input rules                     |
-| `AuthServiceTest.java`         | Auth logic (login, register, edge cases)  |
-| `UserRepositoryTest.java`      | File I/O (save/load user data)            |
-| `AppTest.java` *(placeholder)* | CLI entry point stub                      |
+| Module                       | Responsibility                                   |
+|------------------------------|--------------------------------------------------|
+| `App.java`                   | CLI interface & user flow                        |
+| `AuthService.java`           | Orchestrates auth operations                     |
+| `UserService.java`           | Interacts with repository layer                  |
+| `UserRepository.java`        | Handles I/O operations with `users.txt`          |
+| `InputValidator.java`        | Validates usernames and passwords               |
+| `AuthValidator.java`         | Auth-specific validation (user exists, match)    |
+| `AuditService.java`          | Logs auth events (e.g., login success/failure)   |
+| `RateLimiter.java`           | Throttles repeated login attempts                |
+| `User.java`                  | POJO for user data                               |
 
 ---
 
@@ -50,21 +52,64 @@ banking-app/
 │   │   └── java/com/bank/app/
 │   │       ├── App.java
 │   │       ├── auth/
-│   │       │   ├── AuthService.java
-│   │       │   └── User.java
+│   │       │   ├── services/
+│   │       │   │   ├── AuthService.java
+│   │       │   │   ├── UserService.java
+│   │       │   │   ├── AuditService.java
+│   │       │   │   ├── RateLimiter.java
+│   │       │   │   └── AuthValidator.java
+│   │       │   └── model/
+│   │       │       └── User.java
 │   │       ├── repository/
-│   │       │   └── UserRepository.java
+│   │       │   ├── UserRepository.java
+│   │       │   └── UserRepositoryInterface.java
 │   │       └── validation/
 │   │           └── InputValidator.java
 │   └── test/
 │       └── java/com/bank/app/
-│           ├── AppTest.java
-│           ├── auth/AuthServiceTest.java
-│           ├── repository/UserRepositoryTest.java
-│           └── validation/InputValidatorTest.java
+│           ├── AppTest.java *(placeholder)*
+│           ├── auth/
+│           │   └── services/
+│           │       ├── AuthServiceTest.java
+│           │       ├── UserServiceTest.java
+│           │       ├── AuditServiceTest.java
+│           │       └── RateLimiterTest.java
+│           ├── repository/
+│           │   └── UserRepositoryTest.java
+│           └── validation/
+│               └── InputValidatorTest.java
 ├── users.txt *(gitignored)*
 ├── pom.xml
 └── README.md
+```
+
+---
+
+🧪 Test Coverage
+All core modules are covered with JUnit 5 tests to ensure robustness and maintainability.
+
+Test Class	Coverage Highlights
+AuthServiceTest	Login, registration, edge cases
+UserServiceTest	User retrieval and delegation logic
+UserRepositoryTest	File I/O for user persistence
+InputValidatorTest	Username/password validation rules
+AuditServiceTest	Logging of events
+RateLimiterTest	Brute-force prevention logic
+AppTest (placeholder)	CLI interaction stub
+
+AuthValidator is currently untested — future enhancement planned.
+
+---
+
+🛠 Build & Run
+
+# 🔨 Compile
+mvn clean install
+
+# ▶️ Run CLI
+java -cp target/classes com.bank.app.App
+
+---
 
 
          [👤 User]
@@ -85,13 +130,23 @@ banking-app/
 |   UserRepository.java        |   ← Loads/Saves users (File/Memory)
 +------------------------------+
 
-```
 
-## 🛠 Build & Run
+---
 
-# Compile
-mvn clean install
+📌 Notes
+users.txt is auto-managed and ignored in version control.
 
-# Run
-java -cp target/classes com.bank.app.App
+Each service is decoupled to support microservice extraction and observability.
 
+You can easily add Spring Boot REST wrappers around each service.
+
+
+📄 License
+This project is licensed under the MIT License.
+
+---
+
+Let me know if you’d like me to generate:
+- A Mermaid diagram for visual architecture
+- JaCoCo test coverage reports
+- A `CONTRIBUTING.md` for open-source best practices

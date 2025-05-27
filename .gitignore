@@ -1,18 +1,16 @@
-# Maven build output
-target/
-
-# VS Code
+# IDEs and editors
 .vscode/
-
-# OS / System
-.DS_Store
-
-# SDKs, tools
-.gradle/
 .idea/
 *.iml
 
-# Logs
-*.logusers.txt
+# Maven
+target/
 
+# OS
+.DS_Store
+
+# Logs and generated files
+*.log
+
+# Ignore user data file
 **/users.txt

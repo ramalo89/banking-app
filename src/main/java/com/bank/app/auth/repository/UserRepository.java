@@ -1,10 +1,10 @@
 package com.bank.app.auth.repository;
 
-import com.bank.app.auth.model.User;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.bank.app.auth.model.User;
 
 public class UserRepository implements IUserRepository {
     private final String userFilePath;

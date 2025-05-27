@@ -1,7 +1,8 @@
 package com.bank.app.auth.service;
 
-import com.bank.app.auth.model.User;
 import java.util.Map;
+
+import com.bank.app.auth.model.User;
 
 public class AuthValidator {
 

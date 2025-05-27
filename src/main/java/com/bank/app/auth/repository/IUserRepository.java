@@ -1,7 +1,8 @@
 package com.bank.app.auth.repository;
 
-import com.bank.app.auth.model.User;
 import java.util.Map;
+
+import com.bank.app.auth.model.User;
 
 public interface IUserRepository {
     Map<String, User> loadUsers();
