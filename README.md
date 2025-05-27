@@ -3,7 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-21-blue?logo=openjdk)](https://openjdk.org/projects/jdk/21/)
 [![Build](https://img.shields.io/badge/build-passing-brightgreen?logo=apachemaven)](https://maven.apache.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-![Tests](https://img.shields.io/badge/tests-19_passed-brightgreen)
+![Tests](https://img.shields.io/badge/tests-13_passed-brightgreen)
 
 ---
 
