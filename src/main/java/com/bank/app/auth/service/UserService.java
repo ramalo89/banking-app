@@ -1,7 +1,7 @@
 package com.bank.app.auth.service;
 
 import com.bank.app.auth.model.User;
-import com.bank.app.auth.repository.IUserRepository;
+import com.bank.app.repository.IUserRepository;
 
 import java.util.Map;
 

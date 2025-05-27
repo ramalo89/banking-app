@@ -1,4 +1,4 @@
-package com.bank.app.auth.repository;
+package com.bank.app.repository;
 
 import java.util.Map;
 

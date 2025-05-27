@@ -1,7 +1,7 @@
 package com.bank.app;
 
-import com.bank.app.auth.repository.UserRepository;
 import com.bank.app.auth.service.UserService;
+import com.bank.app.repository.UserRepository;
 
 import java.util.Scanner;
 

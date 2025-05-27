@@ -1,9 +1,10 @@
-package com.bank.app.auth.repository;
+package com.bank.app.repository;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import com.bank.app.auth.model.User;
+import com.bank.app.repository.UserRepository;
 
 import java.io.File;
 import java.util.HashMap;

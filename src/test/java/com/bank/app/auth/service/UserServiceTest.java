@@ -1,8 +1,9 @@
 package com.bank.app.auth.service;
 
-import com.bank.app.auth.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.bank.app.repository.UserRepository;
 
 import java.io.File;
 
