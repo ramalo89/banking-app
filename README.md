@@ -111,7 +111,7 @@ java -cp target/classes com.bank.app.App
 
 ---
 
-
+```
          [👤 User]
              |
      +------------------+
@@ -129,7 +129,7 @@ java -cp target/classes com.bank.app.App
 +------------------------------+
 |   UserRepository.java        |   ← Loads/Saves users (File/Memory)
 +------------------------------+
-
+```
 
 ---
 
