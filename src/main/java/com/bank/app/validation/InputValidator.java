@@ -1,7 +1,6 @@
 package com.bank.app.validation;
 
 public class InputValidator {
-
     public static boolean isUsernameValid(String username) {
         return username != null && username.length() >= 3;
     }

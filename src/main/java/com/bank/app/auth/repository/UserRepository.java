@@ -1,18 +1,19 @@
-package com.bank.app.repository;
+package com.bank.app.auth.repository;
 
-import com.bank.app.auth.User;
+import com.bank.app.auth.model.User;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserRepository {
+public class UserRepository implements IUserRepository {
     private final String userFilePath;
 
     public UserRepository(String userFilePath) {
         this.userFilePath = userFilePath;
     }
 
+    @Override
     public Map<String, User> loadUsers() {
         Map<String, User> users = new HashMap<>();
         File file = new File(userFilePath);
@@ -33,6 +34,7 @@ public class UserRepository {
         return users;
     }
 
+    @Override
     public void saveUsers(Map<String, User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(userFilePath))) {
             for (User user : users.values()) {

@@ -1,11 +1,9 @@
 package com.bank.app.validation;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class InputValidatorTest {
-
+public class InputValidatorTest {
     @Test
     void testValidUsername() {
         assertTrue(InputValidator.isUsernameValid("user123"));
