@@ -162,10 +162,3 @@ You can easily add Spring Boot REST wrappers around each service.
 
 📄 License
 This project is licensed under the MIT License.
-
----
-
-Let me know if you’d like me to generate:
-- A Mermaid diagram for visual architecture
-- JaCoCo test coverage reports
-- A `CONTRIBUTING.md` for open-source best practices
