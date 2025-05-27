@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import com.bank.app.auth.model.User;
-import com.bank.app.repository.UserRepository;
+
 
 import java.io.File;
 import java.util.HashMap;
@@ -28,3 +28,4 @@ public class UserRepositoryTest {
         assertEquals("pass123", loaded.get("junit").getPassword());
     }
 }
+
