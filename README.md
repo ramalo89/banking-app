@@ -7,7 +7,7 @@
 
 ---
 
-## 🔰 Overview - TEST
+## 🔰 Overview
 
 This is a **Java 21 modular CLI banking app** built with **Maven**, focusing on **clean architecture**, **unit testing**, and **decoupled services** for future microservice transformation. Core features include login, registration, and basic validation with extensibility for rate-limiting and audit logging.
 
