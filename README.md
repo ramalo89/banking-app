@@ -115,20 +115,39 @@ java -cp target/classes com.bank.app.App
          [👤 User]
              |
      +------------------+
-     |   App.java (UI)  |   ← Handles user interaction
+     |   App.java (UI)  |   ← Handles user input/output
      +------------------+
              |
-         calls methods
+         orchestrates flow
              ↓
-   +-----------------------+
-   |   AuthService.java    |   ← Business logic for login/register
-   +-----------------------+
+   +------------------------+
+   |   AuthService.java     |   ← Coordinates auth flow
+   +------------------------+
              |
-         reads/writes data
+  ┌──────────┴────────────┬──────────────┐
+  ↓                       ↓              ↓
++-------------------+  +------------------------+  +----------------------+
+| UserService.java  |  |   AuthValidator.java   |  |   RateLimiter.java   |
+| - Loads users     |  | - Validates auth rules |  | - Blocks brute force |
++-------------------+  +------------------------+  +----------------------+
+             |
+         delegates I/O
              ↓
 +------------------------------+
 |   UserRepository.java        |   ← Loads/Saves users (File/Memory)
 +------------------------------+
+             ↑
+      reads/writes data
+             ↓
++-------------------+
+|   users.txt file  |   ← Gitignored flat file storage
++-------------------+
+
+        (side channel)
+             ↓
+     +----------------------+
+     |  AuditService.java   |   ← Logs login/register events
+     +----------------------+
 ```
 
 ---
