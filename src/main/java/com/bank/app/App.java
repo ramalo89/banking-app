@@ -1,5 +1,6 @@
 package com.bank.app;
 
+import com.bank.app.auth.service.AuthService;
 import com.bank.app.auth.service.UserService;
 import com.bank.app.repository.UserRepository;
 
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         UserService userService = new UserService(new UserRepository("users.txt"));
+        AuthService authService = new AuthService(userService);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\uD83D\uDD10 Welcome to the Banking App");
@@ -25,7 +27,7 @@ public class App {
             System.out.print("Enter password: ");
             String password = scanner.nextLine();
 
-            if (userService.login(username, password)) {
+            if (authService.login(username, password)) {
                 System.out.println("✅ Login successful!");
             } else {
                 System.out.println("❌ Login failed. Invalid credentials or too many attempts.");
@@ -37,7 +39,7 @@ public class App {
             System.out.print("Choose a password: ");
             String newPassword = scanner.nextLine();
 
-            userService.register(newUsername, newPassword);
+            authService.register(newUsername, newPassword);
         } else {
             System.out.println("❌ Invalid option. Exiting...");
         }
