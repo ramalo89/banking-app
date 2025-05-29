@@ -5,6 +5,10 @@ import com.bank.app.repository.IUserRepository;
 
 import java.util.Map;
 
+/**
+ * UserService handles core user authentication business logic such as
+ * login, registration, validation, rate limiting, and audit logging.
+ */
 public class UserService {
     private final IUserRepository userRepository;
     private final Map<String, User> users;
@@ -17,9 +21,17 @@ public class UserService {
         this.users = userRepository.loadUsers();
     }
 
+    /**
+     * Attempts to authenticate a user.
+     *
+     * @param username the username entered
+     * @param password the password entered
+     * @return true if login succeeds; false otherwise
+     */
     public boolean login(String username, String password) {
         if (rateLimiter.isBlocked(username)) {
             System.out.println("🚫 Too many failed attempts. Try again later.");
+            audit.logEvent("Blocked login attempt (rate-limited) for user: " + username);
             return false;
         }
 
@@ -35,6 +47,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Attempts to register a new user.
+     *
+     * @param username the desired username
+     * @param password the desired password
+     */
     public void register(String username, String password) {
         if (!validator.isUsernameValid(username)) {
             System.out.println("❌ Username must be at least 3 characters long.");
@@ -51,8 +69,10 @@ public class UserService {
             return;
         }
 
-        users.put(username, new User(username, password));
+        User newUser = new User(username, password);
+        users.put(username, newUser);
         userRepository.saveUsers(users);
+
         audit.logEvent("User registered: " + username);
         System.out.println("✅ Registration successful.");
     }

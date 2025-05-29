@@ -5,26 +5,58 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the RateLimiter class.
+ * Ensures proper blocking and reset behavior.
+ */
 public class RateLimiterTest {
-    private RateLimiter limiter;
+
+    private RateLimiter rateLimiter;
 
     @BeforeEach
     void setup() {
-        limiter = new RateLimiter();
+        rateLimiter = new RateLimiter();
     }
 
     @Test
-    void testRateLimitExceeded() {
+    void testUserNotBlockedInitially() {
+        assertFalse(rateLimiter.isBlocked("user1"));
+    }
+
+    @Test
+    void testRateLimitExceededAfterMaxAttempts() {
         String user = "testuser";
-        for (int i = 0; i < 5; i++) limiter.recordAttempt(user);
-        assertTrue(limiter.isBlocked(user));
+
+        // Simulate 5 failed attempts
+        for (int i = 0; i < 5; i++) {
+            rateLimiter.recordAttempt(user);
+        }
+
+        assertTrue(rateLimiter.isBlocked(user));
     }
 
     @Test
     void testResetClearsAttempts() {
         String user = "resetuser";
-        limiter.recordAttempt(user);
-        limiter.resetAttempts(user);
-        assertFalse(limiter.isBlocked(user));
+
+        rateLimiter.recordAttempt(user);
+        rateLimiter.recordAttempt(user);
+        assertFalse(rateLimiter.isBlocked(user)); // not yet blocked
+
+        rateLimiter.resetAttempts(user);
+        assertFalse(rateLimiter.isBlocked(user));
+        assertEquals(0, rateLimiter.getAttemptCount(user));
+    }
+
+    @Test
+    void testAttemptCountTracking() {
+        String user = "attemptUser";
+        assertEquals(0, rateLimiter.getAttemptCount(user));
+
+        rateLimiter.recordAttempt(user);
+        assertEquals(1, rateLimiter.getAttemptCount(user));
+
+        rateLimiter.recordAttempt(user);
+        assertEquals(2, rateLimiter.getAttemptCount(user));
     }
 }

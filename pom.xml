@@ -1,35 +1,47 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-         http://maven.apache.org/maven-v4_0_0.xsd">
-         
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.bank.app</groupId>
   <artifactId>banking-app</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-  <name>banking-app</name>
-  <url>http://maven.apache.org</url>
 
-  <!-- ✅ Set Java version -->
+  <name>banking-app</name>
+  <description>CLI-based modular banking application</description>
+  <url>http://example.com/banking-app</url>
+
+  <!-- ✅ Java version -->
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>   <!-- Use 21 if you prefer -->
+    <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <dependencies>
-    <!-- ✅ Updated JUnit version (JUnit 5) -->
+    <!-- ✅ JUnit 5 for testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- ✅ Mockito for mocking in tests -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>5.12.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
-  <!-- ✅ Add compiler plugin -->
   <build>
     <plugins>
+      <!-- ✅ Compiler plugin for Java 21 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -40,10 +52,16 @@
         </configuration>
       </plugin>
 
+      <!-- ✅ Surefire plugin for running JUnit tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
       </plugin>
     </plugins>
   </build>

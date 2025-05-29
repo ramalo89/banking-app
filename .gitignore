@@ -1,16 +1,17 @@
-# IDEs and editors
-.vscode/
-.idea/
+# Ignore build output
+/target/
+
+# Ignore IDE settings
 *.iml
+.idea/
+.vscode/
 
-# Maven
-target/
+# Ignore compiled classes
+*.class
 
-# OS
-.DS_Store
-
-# Logs and generated files
+# Ignore logs and user data
 *.log
+users.txt
 
-# Ignore user data file
-**/users.txt
+# Ignore OS files
+.DS_Store
